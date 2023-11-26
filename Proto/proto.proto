@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "./Homework05";
+
+message ClientBid {
+    int64 amount  = 1;
+    string ClientId = 2;
+}
+
+message Acknowledgement {
+    int64 ack = 1; // ack: fail = 0, success = 1, exception = 2
+}
+
+message AuctionState {
+    int64 highestBid = 1;
+    string bidderId = 2;
+    bool isCompleted = 3;
+    int64 timeStamp = 4;
+}
+
+message Connection {
+    int64 serverId = 1;
+}
+
+message Empty {}
+
+service ServerConnection {
+    rpc UpdateAuctionState(AuctionState) returns (AuctionState);
+    rpc GetAuctionState(Empty) returns (AuctionState);
+    rpc Bid(ClientBid) returns (Acknowledgement);
+    rpc ConnectToReplica(Connection) returns (Empty);
+    rpc GetAlternateServer(Empty) returns (Connection);
+}
