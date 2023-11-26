@@ -58,7 +58,7 @@ func ConnectToServer(port int64) {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
 
-	fmt.Printf("Client %v: Attemps to dial on port 9000\n", port)
+	fmt.Printf("Client %v: Attemps to dial on port %v\n",*id, port)
 
 	var conn *grpc.ClientConn
 

@@ -21,7 +21,7 @@ type Server struct {
 }
 
 var port = flag.Int64("port", 1000, "port to use for this")
-var replicas = flag.String("Replicas", "", "ports of server replicas") // example use -Replicas "1000,1001,1002"
+var replicas = flag.String("replicas", "", "ports of server replicas") // example use -replicas "1000,1001,1002"
 var serverReplicas map[int64]gRPC.ServerConnectionClient = make(map[int64]gRPC.ServerConnectionClient)
 var state = &gRPC.AuctionState{}
 
@@ -93,7 +93,7 @@ func connect(dialPort int64){
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
 
-	fmt.Printf("Server %v: Attemps to dial to replica node on port %v", *port, dialPort)
+	fmt.Printf("Server %v: Attemps to dial to replica node on port %v\n", *port, dialPort)
 
 	var conn *grpc.ClientConn
 
