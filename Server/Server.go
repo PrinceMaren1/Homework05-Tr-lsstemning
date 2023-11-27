@@ -25,7 +25,6 @@ var replicas = flag.String("replicas", "", "ports of server replicas") // exampl
 var serverReplicas map[int64]gRPC.ServerConnectionClient = make(map[int64]gRPC.ServerConnectionClient)
 var state = &gRPC.AuctionState{}
 
-
 func main() {
 	flag.Parse()
 
@@ -37,9 +36,11 @@ func main() {
 	defer f.Close()
 	log.SetOutput(f)
 	log.Println("Starting server")
-	state.TimeStamp = 30 // Time counts down. When it hits 0, the auction ends
+	state.TimeStamp = 300 // Time counts down. When it hits 0, the auction ends
 
-	replicaPorts := strings.Split(*replicas,",")
+	replicaPorts := strings.Split(*replicas, ",")
+
+	go launchServer()
 
 	for i := 0; i < len(replicaPorts); i++ {
 		if replicaPorts[i] == "" {
@@ -56,17 +57,19 @@ func main() {
 	}
 
 	go func() {
-		for (state.TimeStamp > 0) {
+		for state.TimeStamp > 0 {
 			time.Sleep(time.Duration(1) * time.Second)
 			state.TimeStamp = state.TimeStamp - 1
 		}
-		if (!state.IsCompleted) {
+		if !state.IsCompleted {
 			state.IsCompleted = true
 			UpdateReplicas()
 		}
 	}()
 
-	launchServer()
+	for {
+
+	}
 }
 
 func launchServer() {
@@ -87,7 +90,7 @@ func launchServer() {
 	}
 }
 
-func connect(dialPort int64){
+func connect(dialPort int64) {
 	opts := []grpc.DialOption{
 		grpc.WithBlock(),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
@@ -110,11 +113,11 @@ func connect(dialPort int64){
 }
 
 func UpdateReplicas() {
-	for i := 0; i < len(serverReplicas); i++ {
-		freshestState, err := serverReplicas[int64(i)].UpdateAuctionState(context.Background(), state)
-		
-		if (err != nil) {
-			delete(serverReplicas,int64(i))
+	for key := range serverReplicas {
+		freshestState, err := serverReplicas[key].UpdateAuctionState(context.Background(), state)
+
+		if err != nil {
+			delete(serverReplicas, key)
 		}
 
 		state = freshestState
@@ -141,7 +144,7 @@ func (s *Server) GetAuctionState(ctx context.Context, msg *gRPC.Empty) (*gRPC.Au
 
 func (s *Server) UpdateAuctionState(ctx context.Context, msg *gRPC.AuctionState) (*gRPC.AuctionState, error) {
 	// Checking which state has the highest bid an update accordingly.
-	if msg.HighestBid > state.HighestBid && !state.IsCompleted{
+	if msg.HighestBid > state.HighestBid && !state.IsCompleted {
 		state.HighestBid = msg.HighestBid
 		state.BidderId = msg.BidderId
 	}
@@ -158,14 +161,14 @@ func (s *Server) UpdateAuctionState(ctx context.Context, msg *gRPC.AuctionState)
 func (s *Server) Bid(ctx context.Context, msg *gRPC.ClientBid) (*gRPC.Acknowledgement, error) {
 	var bidSucceded int64 = 0
 
-	if ((msg.Amount > state.HighestBid) && !state.IsCompleted) {
+	if (msg.Amount > state.HighestBid) && !state.IsCompleted {
 		state.HighestBid = msg.Amount
 		state.BidderId = msg.ClientId
 
 		// Update state of other replicas. Waits for all of them to respond before responding to client
 		UpdateReplicas()
 		// The state update goes both ways, so we confirm that the bidder is still highest after confirming with other replicas
-		if (state.BidderId == msg.ClientId && state.HighestBid == msg.Amount) {
+		if state.BidderId == msg.ClientId && state.HighestBid == msg.Amount {
 			bidSucceded = 1
 		}
 	}

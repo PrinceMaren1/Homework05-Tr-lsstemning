@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+
 	//"net"
 	"os"
 	"strconv"
@@ -14,12 +15,11 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-var id = flag.String("id", "Client", "This clients Id / name")    // Used when communicating with the server(s)
+var id = flag.String("id", "Client", "This clients Id / name") // Used when communicating with the server(s)
 var serverPort = flag.Int64("server", 1500, "The port for the initial server to use")
 var alternatePort int64
 var server gRPC.ServerConnectionClient
 var ServerConn *grpc.ClientConn
-
 
 func main() {
 	flag.Parse()
@@ -43,7 +43,7 @@ func main() {
 		} else {
 			bid, err := strconv.Atoi(input)
 
-			if (err != nil) {
+			if err != nil {
 				fmt.Println("Could not parse input. Please write an integer to submit a bid, or a question mark to query current highest bid")
 			}
 
@@ -58,7 +58,7 @@ func ConnectToServer(port int64) {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
 
-	fmt.Printf("Client %v: Attemps to dial on port %v\n",*id, port)
+	fmt.Printf("Client %v: Attemps to dial on port %v\n", *id, port)
 
 	var conn *grpc.ClientConn
 
@@ -76,30 +76,32 @@ func ConnectToServer(port int64) {
 	alternatePort = alternateConnection.ServerId
 }
 
-func Bid(bidAmount int64){
+func Bid(bidAmount int64) {
 	result, err := server.Bid(context.Background(), &gRPC.ClientBid{Amount: bidAmount, ClientId: *id})
-	
+
 	if err != nil {
 		ConnectToServer(alternatePort)
-	} 
-	
-	if result.Ack == 1 { 
-		fmt.Printf("Bid accepted")
-	} else if result.Ack == 0 {
-		fmt.Printf("Bid to low or the action has ended")
+		Bid(bidAmount)
+	} else {
+		if result.Ack == 1 {
+			fmt.Printf("Bid accepted")
+		} else if result.Ack == 0 {
+			fmt.Printf("Bid to low or the action has ended")
+		}
 	}
 }
 
-func PrintAuctionState(){
+func PrintAuctionState() {
 	state, err := server.GetAuctionState(context.Background(), &gRPC.Empty{})
 
 	if err != nil {
 		ConnectToServer(alternatePort)
-	} 
-
-	if (state.IsCompleted) {
-		fmt.Printf("The auction is completed. %v won with a bid of %v\n", state.BidderId, state.HighestBid)
+		PrintAuctionState()
 	} else {
-		fmt.Printf("The current highest bidder is %v, with a bid of %v\n", state.BidderId, state.HighestBid)
+		if state.IsCompleted {
+			fmt.Printf("The auction is completed. %v won with a bid of %v\n", state.BidderId, state.HighestBid)
+		} else {
+			fmt.Printf("The current highest bidder is %v, with a bid of %v\n", state.BidderId, state.HighestBid)
+		}
 	}
 }
