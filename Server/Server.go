@@ -36,7 +36,7 @@ func main() {
 	defer f.Close()
 	log.SetOutput(f)
 	log.Println("Starting server")
-	state.TimeStamp = 300 // Time counts down. When it hits 0, the auction ends
+	state.TimeStamp = 30 // Time counts down. When it hits 0, the auction ends
 
 	replicaPorts := strings.Split(*replicas, ",")
 

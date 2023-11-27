@@ -45,9 +45,9 @@ func main() {
 
 			if err != nil {
 				fmt.Println("Could not parse input. Please write an integer to submit a bid, or a question mark to query current highest bid")
+			} else {
+				Bid(int64(bid))
 			}
-
-			Bid(int64(bid))
 		}
 	}
 }
@@ -84,9 +84,9 @@ func Bid(bidAmount int64) {
 		Bid(bidAmount)
 	} else {
 		if result.Ack == 1 {
-			fmt.Printf("Bid accepted")
+			fmt.Printf("Bid accepted\n")
 		} else if result.Ack == 0 {
-			fmt.Printf("Bid to low or the action has ended")
+			fmt.Printf("Bid to low or the action has ended\n")
 		}
 	}
 }
@@ -100,7 +100,9 @@ func PrintAuctionState() {
 	} else {
 		if state.IsCompleted {
 			fmt.Printf("The auction is completed. %v won with a bid of %v\n", state.BidderId, state.HighestBid)
-		} else {
+		} else if state.HighestBid == 0 {
+			fmt.Printf("There are no bids")
+		}else {
 			fmt.Printf("The current highest bidder is %v, with a bid of %v\n", state.BidderId, state.HighestBid)
 		}
 	}
