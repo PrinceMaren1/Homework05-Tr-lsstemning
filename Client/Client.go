@@ -80,13 +80,16 @@ func Bid(bidAmount int64) {
 	result, err := server.Bid(context.Background(), &gRPC.ClientBid{Amount: bidAmount, ClientId: *id})
 
 	if err != nil {
+		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v", *serverPort, alternatePort)
 		ConnectToServer(alternatePort)
 		Bid(bidAmount)
 	} else {
 		if result.Ack == 1 {
-			fmt.Printf("Bid accepted\n")
+			fmt.Printf("Bid accepted with a bid of %v \n", bidAmount)
+			log.Printf("Bid accepted with a bid of %v \n", bidAmount)
 		} else if result.Ack == 0 {
 			fmt.Printf("Bid to low or the action has ended\n")
+			log.Printf("Bid to low or the action has ended\n")
 		}
 	}
 }
@@ -100,10 +103,13 @@ func PrintAuctionState() {
 	} else {
 		if state.IsCompleted {
 			fmt.Printf("The auction is completed. %v won with a bid of %v\n", state.BidderId, state.HighestBid)
+			log.Printf("The auction is completed. %v won with a bid of %v\n", state.BidderId, state.HighestBid)
 		} else if state.HighestBid == 0 {
 			fmt.Printf("There are no bids\n")
+			log.Printf("There are no bids\n")
 		}else {
 			fmt.Printf("The current highest bidder is %v, with a bid of %v\n", state.BidderId, state.HighestBid)
+			log.Printf("The current highest bidder is %v, with a bid of %v\n", state.BidderId, state.HighestBid)
 		}
 	}
 }
