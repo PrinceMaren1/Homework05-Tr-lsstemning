@@ -101,7 +101,7 @@ func PrintAuctionState() {
 		if state.IsCompleted {
 			fmt.Printf("The auction is completed. %v won with a bid of %v\n", state.BidderId, state.HighestBid)
 		} else if state.HighestBid == 0 {
-			fmt.Printf("There are no bids")
+			fmt.Printf("There are no bids\n")
 		}else {
 			fmt.Printf("The current highest bidder is %v, with a bid of %v\n", state.BidderId, state.HighestBid)
 		}
