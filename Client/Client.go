@@ -81,7 +81,7 @@ func Bid(bidAmount int64) {
 	fmt.Printf("Bidding %v. ", bidAmount)
 
 	if err != nil {
-		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v", *serverPort, alternatePort)
+		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v\n", *serverPort, alternatePort)
 		ConnectToServer(alternatePort)
 		Bid(bidAmount)
 	} else {
@@ -100,7 +100,7 @@ func PrintAuctionState() {
 	log.Printf("Request auction state from server...\n")
 
 	if err != nil {
-		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v", *serverPort, alternatePort)
+		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v\n", *serverPort, alternatePort)
 		ConnectToServer(alternatePort)
 		PrintAuctionState()
 	} else {

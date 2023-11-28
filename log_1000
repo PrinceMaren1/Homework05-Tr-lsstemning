@@ -9,3 +9,10 @@
 2023/11/28 16:48:26 Updating highest bid to align with replica
 2023/11/28 16:48:36 Updating highest bid to align with replica
 2023/11/28 16:48:36 Auction completed. Updating replicas.
+2023/11/28 16:53:09 Starting server
+2023/11/28 16:53:09 Started listening for incoming messages
+2023/11/28 16:53:10 Connecting to replica server at: 1002
+2023/11/28 16:53:10 Connecting to replica server at: 1001
+2023/11/28 16:53:17 Updating highest bid to align with replica
+2023/11/28 16:53:27 Sending auction state to client WantToBuySpaces
+2023/11/28 16:53:39 Auction completed. Updating replicas.
