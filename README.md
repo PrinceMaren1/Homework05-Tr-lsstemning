@@ -9,6 +9,9 @@ To start the program:
 ## Starting Clients
 - Now run the first Client, with a given port to one of the running servers, aswell as a client id. "go run Client.go -port 1000"
 - Repeat as many times as you like :)
+- If you want to bid from a client, just type the number, that you want to bid.
+- If you want to know the current state of the auction, just type "?".
 
 ## Quick start
-If you want to run a quick demo and you are on windows, you can run the demo.bat file.
+- If you want to run a quick demo and you are on windows, you can run the demo.bat file.
+- You still have to bid and such from the clients.
