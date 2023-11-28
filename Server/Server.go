@@ -62,6 +62,7 @@ func main() {
 			state.TimeStamp = state.TimeStamp - 1
 		}
 		if !state.IsCompleted {
+			log.Printf("Auction completed. Updating replicas.")
 			state.IsCompleted = true
 			UpdateReplicas()
 		}
@@ -109,6 +110,7 @@ func connect(dialPort int64) {
 
 	server := gRPC.NewServerConnectionClient(conn)
 	serverReplicas[dialPort] = server
+	log.Printf("Connecting to replica server at: %v\n", dialPort)
 	fmt.Println("The connection is: ", conn.GetState().String())
 }
 
@@ -145,10 +147,14 @@ func (s *Server) GetAuctionState(ctx context.Context, msg *gRPC.Empty) (*gRPC.Au
 func (s *Server) UpdateAuctionState(ctx context.Context, msg *gRPC.AuctionState) (*gRPC.AuctionState, error) {
 	// Checking which state has the highest bid an update accordingly.
 	if msg.HighestBid > state.HighestBid && !state.IsCompleted {
+		log.Printf("Updating highest bid to align with replica")
 		state.HighestBid = msg.HighestBid
 		state.BidderId = msg.BidderId
 	}
 	if !state.IsCompleted {
+		if msg.IsCompleted {
+			log.Printf("Closing auction to align with replica")
+		}
 		state.IsCompleted = msg.IsCompleted
 	}
 	// Set Auction time to the lowest of the two states
@@ -159,9 +165,11 @@ func (s *Server) UpdateAuctionState(ctx context.Context, msg *gRPC.AuctionState)
 }
 
 func (s *Server) Bid(ctx context.Context, msg *gRPC.ClientBid) (*gRPC.Acknowledgement, error) {
+	log.Printf("Recived bid of %v from client %v\n", msg.Amount, msg.ClientId)
 	var bidSucceded int64 = 0
 
 	if (msg.Amount > state.HighestBid) && !state.IsCompleted {
+		log.Printf("Bid seems good unless replicas has a higher bid. Updating state in replicas.")
 		state.HighestBid = msg.Amount
 		state.BidderId = msg.ClientId
 
@@ -171,6 +179,12 @@ func (s *Server) Bid(ctx context.Context, msg *gRPC.ClientBid) (*gRPC.Acknowledg
 		if state.BidderId == msg.ClientId && state.HighestBid == msg.Amount {
 			bidSucceded = 1
 		}
+	}
+
+	if bidSucceded == 1 {
+		log.Printf("Sending BID SUCCESS response to client.")
+	} else {
+		log.Printf("Sending BID DENIED response to client.")
 	}
 
 	return &gRPC.Acknowledgement{Ack: bidSucceded}, nil
