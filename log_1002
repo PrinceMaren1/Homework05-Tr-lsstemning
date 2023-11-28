@@ -9,3 +9,7 @@
 2023/11/28 16:37:50 Bid seems good unless replicas has a higher bid. Updating state in replicas.
 2023/11/28 16:37:50 Sending BID SUCCESS response to client.
 2023/11/28 16:37:57 Updating highest bid to align with replica
+2023/11/28 16:47:13 Starting server
+2023/11/28 16:47:13 Started listening for incoming messages
+2023/11/28 16:47:14 Connecting to replica server at: 1000
+2023/11/28 16:47:14 Connecting to replica server at: 1001

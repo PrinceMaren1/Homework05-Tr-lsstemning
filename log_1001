@@ -11,3 +11,7 @@
 2023/11/28 16:37:57 Recived bid of 12 from client SortePowerRanger
 2023/11/28 16:37:57 Bid seems good unless replicas has a higher bid. Updating state in replicas.
 2023/11/28 16:37:57 Sending BID SUCCESS response to client.
+2023/11/28 16:47:13 Starting server
+2023/11/28 16:47:13 Started listening for incoming messages
+2023/11/28 16:47:14 Connecting to replica server at: 1000
+2023/11/28 16:47:14 Connecting to replica server at: 1002

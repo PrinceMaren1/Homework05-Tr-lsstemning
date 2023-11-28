@@ -31,10 +31,10 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServerConnectionClient interface {
 	UpdateAuctionState(ctx context.Context, in *AuctionState, opts ...grpc.CallOption) (*AuctionState, error)
-	GetAuctionState(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AuctionState, error)
+	GetAuctionState(ctx context.Context, in *ClientInfo, opts ...grpc.CallOption) (*AuctionState, error)
 	Bid(ctx context.Context, in *ClientBid, opts ...grpc.CallOption) (*Acknowledgement, error)
 	ConnectToReplica(ctx context.Context, in *Connection, opts ...grpc.CallOption) (*Empty, error)
-	GetAlternateServer(ctx context.Context, in *ClientInfo, opts ...grpc.CallOption) (*Connection, error)
+	GetAlternateServer(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Connection, error)
 }
 
 type serverConnectionClient struct {
@@ -54,7 +54,7 @@ func (c *serverConnectionClient) UpdateAuctionState(ctx context.Context, in *Auc
 	return out, nil
 }
 
-func (c *serverConnectionClient) GetAuctionState(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AuctionState, error) {
+func (c *serverConnectionClient) GetAuctionState(ctx context.Context, in *ClientInfo, opts ...grpc.CallOption) (*AuctionState, error) {
 	out := new(AuctionState)
 	err := c.cc.Invoke(ctx, ServerConnection_GetAuctionState_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -81,7 +81,7 @@ func (c *serverConnectionClient) ConnectToReplica(ctx context.Context, in *Conne
 	return out, nil
 }
 
-func (c *serverConnectionClient) GetAlternateServer(ctx context.Context, in *ClientInfo, opts ...grpc.CallOption) (*Connection, error) {
+func (c *serverConnectionClient) GetAlternateServer(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Connection, error) {
 	out := new(Connection)
 	err := c.cc.Invoke(ctx, ServerConnection_GetAlternateServer_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -95,10 +95,10 @@ func (c *serverConnectionClient) GetAlternateServer(ctx context.Context, in *Cli
 // for forward compatibility
 type ServerConnectionServer interface {
 	UpdateAuctionState(context.Context, *AuctionState) (*AuctionState, error)
-	GetAuctionState(context.Context, *Empty) (*AuctionState, error)
+	GetAuctionState(context.Context, *ClientInfo) (*AuctionState, error)
 	Bid(context.Context, *ClientBid) (*Acknowledgement, error)
 	ConnectToReplica(context.Context, *Connection) (*Empty, error)
-	GetAlternateServer(context.Context, *ClientInfo) (*Connection, error)
+	GetAlternateServer(context.Context, *Empty) (*Connection, error)
 	mustEmbedUnimplementedServerConnectionServer()
 }
 
@@ -109,7 +109,7 @@ type UnimplementedServerConnectionServer struct {
 func (UnimplementedServerConnectionServer) UpdateAuctionState(context.Context, *AuctionState) (*AuctionState, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAuctionState not implemented")
 }
-func (UnimplementedServerConnectionServer) GetAuctionState(context.Context, *Empty) (*AuctionState, error) {
+func (UnimplementedServerConnectionServer) GetAuctionState(context.Context, *ClientInfo) (*AuctionState, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuctionState not implemented")
 }
 func (UnimplementedServerConnectionServer) Bid(context.Context, *ClientBid) (*Acknowledgement, error) {
@@ -118,7 +118,7 @@ func (UnimplementedServerConnectionServer) Bid(context.Context, *ClientBid) (*Ac
 func (UnimplementedServerConnectionServer) ConnectToReplica(context.Context, *Connection) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConnectToReplica not implemented")
 }
-func (UnimplementedServerConnectionServer) GetAlternateServer(context.Context, *ClientInfo) (*Connection, error) {
+func (UnimplementedServerConnectionServer) GetAlternateServer(context.Context, *Empty) (*Connection, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAlternateServer not implemented")
 }
 func (UnimplementedServerConnectionServer) mustEmbedUnimplementedServerConnectionServer() {}
@@ -153,7 +153,7 @@ func _ServerConnection_UpdateAuctionState_Handler(srv interface{}, ctx context.C
 }
 
 func _ServerConnection_GetAuctionState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
+	in := new(ClientInfo)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -165,7 +165,7 @@ func _ServerConnection_GetAuctionState_Handler(srv interface{}, ctx context.Cont
 		FullMethod: ServerConnection_GetAuctionState_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerConnectionServer).GetAuctionState(ctx, req.(*Empty))
+		return srv.(ServerConnectionServer).GetAuctionState(ctx, req.(*ClientInfo))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -207,7 +207,7 @@ func _ServerConnection_ConnectToReplica_Handler(srv interface{}, ctx context.Con
 }
 
 func _ServerConnection_GetAlternateServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClientInfo)
+	in := new(Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -219,7 +219,7 @@ func _ServerConnection_GetAlternateServer_Handler(srv interface{}, ctx context.C
 		FullMethod: ServerConnection_GetAlternateServer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerConnectionServer).GetAlternateServer(ctx, req.(*ClientInfo))
+		return srv.(ServerConnectionServer).GetAlternateServer(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
