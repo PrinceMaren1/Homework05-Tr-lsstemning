@@ -10,7 +10,7 @@
             "request": "launch",
             "mode": "debug",
             "program": "${file}",
-            "args": ["-server", "1000", "-id", "BidGod"]
+            "args": ["-port", "1001", "-replicas", "1000"]
         }
 
     ]

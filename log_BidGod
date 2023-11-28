@@ -1,2 +1,22 @@
-2023/11/28 16:48:06 Starting client
-2023/11/28 16:53:10 Starting client
+2023/11/28 17:09:54 Starting client
+2023/11/28 17:09:55 Request auction state from server...
+2023/11/28 17:09:55 There are no bids
+2023/11/28 17:09:56 Bid accepted
+2023/11/28 17:10:01 Request auction state from server...
+2023/11/28 17:10:01 Server: 1000 has crashed, trying to connect to backup server on port: 1001
+2023/11/28 17:10:01 Request auction state from server...
+2023/11/28 17:10:01 The current highest bidder is BidGod, with a bid of 5
+2023/11/28 17:10:03 Server: 1000 has crashed, trying to connect to backup server on port: 1002
+2023/11/28 17:10:03 Server: 1000 has crashed, trying to connect to backup server on port: 1000
+2023/11/28 17:11:50 Starting client
+2023/11/28 17:13:00 Starting client
+2023/11/28 17:13:11 There are no bids
+2023/11/28 17:13:17 Server: 1000 has crashed, trying to connect to backup server on port: 1002
+2023/11/28 17:13:17 There are no bids
+2023/11/28 17:13:19 Bid accepted with a bid of 5 
+2023/11/28 17:13:21 Bid accepted with a bid of 8 
+2023/11/28 17:13:31 Bid to low or the action has ended
+2023/11/28 17:13:33 The auction is completed. BidGod won with a bid of 8
+2023/11/28 17:13:45 Starting client
+2023/11/28 17:15:40 Starting client
+2023/11/28 17:20:08 Starting client

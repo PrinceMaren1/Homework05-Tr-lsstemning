@@ -120,18 +120,26 @@ func UpdateReplicas() {
 
 		if err != nil {
 			delete(serverReplicas, key)
+		} else {
+			state = freshestState
 		}
-
-		state = freshestState
 	}
 }
 
 func (s *Server) GetAlternateServer(ctx context.Context, msg *gRPC.Empty) (*gRPC.Connection, error) {
 	var port int64 = 0
+	log.Println("Fetching alternate port for client")
+
+	for len(serverReplicas) == 0 {
+
+	}
+
 	for key := range serverReplicas {
 		port = key
 		break
 	}
+
+	log.Printf("Sending value to client: %v\n", port)
 	return &gRPC.Connection{ServerId: port}, nil
 }
 

@@ -1,27 +1,39 @@
-2023/11/28 16:48:06 Starting server
-2023/11/28 16:48:06 Started listening for incoming messages
-2023/11/28 16:48:06 Connecting to replica server at: 1000
-2023/11/28 16:48:07 Connecting to replica server at: 1001
-2023/11/28 16:48:13 Updating highest bid to align with replica
-2023/11/28 16:48:15 Sending auction state to client WantToBuySpaces
-2023/11/28 16:48:17 Recived bid of 8 from client WantToBuySpaces
-2023/11/28 16:48:17 Bid seems good unless replicas has a higher bid. Updating state in replicas.
-2023/11/28 16:48:17 Sending BID SUCCESS response to client.
-2023/11/28 16:48:21 Updating highest bid to align with replica
-2023/11/28 16:48:23 Sending auction state to client WantToBuySpaces
-2023/11/28 16:48:24 Recived bid of 25 from client WantToBuySpaces
-2023/11/28 16:48:24 Bid seems good unless replicas has a higher bid. Updating state in replicas.
-2023/11/28 16:48:24 Sending BID SUCCESS response to client.
-2023/11/28 16:48:26 Updating highest bid to align with replica
-2023/11/28 16:48:33 Recived bid of 27 from client WantToBuySpaces
-2023/11/28 16:48:33 Sending BID DENIED response to client.
-2023/11/28 16:48:36 Updating highest bid to align with replica
-2023/11/28 16:48:36 Closing auction to align with replica
-2023/11/28 16:48:38 Sending auction state to client WantToBuySpaces
-2023/11/28 16:53:09 Starting server
-2023/11/28 16:53:09 Started listening for incoming messages
-2023/11/28 16:53:09 Connecting to replica server at: 1000
-2023/11/28 16:53:11 Connecting to replica server at: 1001
-2023/11/28 16:53:17 Recived bid of 5 from client WantToBuySpaces
-2023/11/28 16:53:17 Bid seems good unless replicas has a higher bid. Updating state in replicas.
-2023/11/28 16:53:17 Sending BID SUCCESS response to client.
+2023/11/28 17:09:50 Starting server
+2023/11/28 17:09:50 Started listening for incoming messages
+2023/11/28 17:09:50 Connecting to replica server at: 1000
+2023/11/28 17:09:50 Connecting to replica server at: 1001
+2023/11/28 17:09:56 Updating highest bid to align with replica
+2023/11/28 17:10:03 Recived bid of 8 from client BidGod
+2023/11/28 17:10:03 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:11:50 Starting server
+2023/11/28 17:11:50 Started listening for incoming messages
+2023/11/28 17:11:51 Connecting to replica server at: 1000
+2023/11/28 17:11:51 Connecting to replica server at: 1001
+2023/11/28 17:11:57 Updating highest bid to align with replica
+2023/11/28 17:13:00 Starting server
+2023/11/28 17:13:00 Started listening for incoming messages
+2023/11/28 17:13:00 Connecting to replica server at: 1000
+2023/11/28 17:13:01 Connecting to replica server at: 1001
+2023/11/28 17:13:17 Sending auction state to client BidGod
+2023/11/28 17:13:19 Recived bid of 5 from client BidGod
+2023/11/28 17:13:19 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:13:19 Sending BID SUCCESS response to client.
+2023/11/28 17:13:21 Recived bid of 8 from client BidGod
+2023/11/28 17:13:21 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:13:21 Sending BID SUCCESS response to client.
+2023/11/28 17:13:30 Auction completed. Updating replicas.
+2023/11/28 17:13:31 Recived bid of 8 from client BidGod
+2023/11/28 17:13:31 Sending BID DENIED response to client.
+2023/11/28 17:13:33 Sending auction state to client BidGod
+2023/11/28 17:13:45 Starting server
+2023/11/28 17:13:45 Started listening for incoming messages
+2023/11/28 17:13:46 Connecting to replica server at: 1000
+2023/11/28 17:13:46 Connecting to replica server at: 1001
+2023/11/28 17:15:40 Starting server
+2023/11/28 17:15:40 Started listening for incoming messages
+2023/11/28 17:15:41 Connecting to replica server at: 1000
+2023/11/28 17:15:41 Connecting to replica server at: 1001
+2023/11/28 17:20:08 Starting server
+2023/11/28 17:20:08 Started listening for incoming messages
+2023/11/28 17:20:08 Connecting to replica server at: 1000
+2023/11/28 17:20:08 Connecting to replica server at: 1001
