@@ -140,7 +140,8 @@ func (s *Server) ConnectToReplica(ctx context.Context, msg *gRPC.Connection) (*g
 	return &gRPC.Empty{}, nil
 }
 
-func (s *Server) GetAuctionState(ctx context.Context, msg *gRPC.Empty) (*gRPC.AuctionState, error) {
+func (s *Server) GetAuctionState(ctx context.Context, msg *gRPC.ClientInfo) (*gRPC.AuctionState, error) {
+	log.Printf("Sending auction state to client %v", msg.ClientId)
 	return state, nil
 }
 

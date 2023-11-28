@@ -95,7 +95,7 @@ func Bid(bidAmount int64) {
 }
 
 func PrintAuctionState() {
-	state, err := server.GetAuctionState(context.Background(), &gRPC.Empty{})
+	state, err := server.GetAuctionState(context.Background(), &gRPC.ClientInfo{ClientId: *id})
 
 	if err != nil {
 		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v", *serverPort, alternatePort)
@@ -108,7 +108,7 @@ func PrintAuctionState() {
 		} else if state.HighestBid == 0 {
 			fmt.Printf("There are no bids\n")
 			log.Printf("There are no bids\n")
-		}else {
+		} else {
 			fmt.Printf("The current highest bidder is %v, with a bid of %v\n", state.BidderId, state.HighestBid)
 			log.Printf("The current highest bidder is %v, with a bid of %v\n", state.BidderId, state.HighestBid)
 		}

@@ -24,6 +24,10 @@ message Connection {
     int64 serverId = 1;
 }
 
+message ClientInfo {
+    int64 ClientId = 1;
+}
+
 message Empty {}
 
 service ServerConnection {
@@ -31,5 +35,5 @@ service ServerConnection {
     rpc GetAuctionState(Empty) returns (AuctionState);
     rpc Bid(ClientBid) returns (Acknowledgement);
     rpc ConnectToReplica(Connection) returns (Empty);
-    rpc GetAlternateServer(Empty) returns (Connection);
+    rpc GetAlternateServer(ClientInfo) returns (Connection);
 }
