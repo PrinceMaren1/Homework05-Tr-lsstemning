@@ -78,6 +78,7 @@ func ConnectToServer(port int64) {
 
 func Bid(bidAmount int64) {
 	result, err := server.Bid(context.Background(), &gRPC.ClientBid{Amount: bidAmount, ClientId: *id})
+	fmt.Printf("Bidding %v. ", bidAmount)
 
 	if err != nil {
 		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v", *serverPort, alternatePort)
@@ -86,16 +87,17 @@ func Bid(bidAmount int64) {
 	} else {
 		if result.Ack == 1 {
 			fmt.Printf("Bid accepted with a bid of %v \n", bidAmount)
-			log.Printf("Bid accepted with a bid of %v \n", bidAmount)
+			log.Printf("Bid accepted")
 		} else if result.Ack == 0 {
-			fmt.Printf("Bid to low or the action has ended\n")
-			log.Printf("Bid to low or the action has ended\n")
+			fmt.Printf("Bid too low or the auction has ended\n")
+			log.Printf("Bid too low")
 		}
 	}
 }
 
 func PrintAuctionState() {
 	state, err := server.GetAuctionState(context.Background(), &gRPC.ClientInfo{ClientId: *id})
+	log.Printf("Request auction state from server...\n")
 
 	if err != nil {
 		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v", *serverPort, alternatePort)
