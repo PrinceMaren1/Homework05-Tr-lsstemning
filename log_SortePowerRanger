@@ -1,9 +1,5 @@
-2023/11/28 17:11:50 Starting client
-2023/11/28 17:11:56 There are no bids
-2023/11/28 17:11:57 Bid accepted with a bid of 8 
-2023/11/28 17:12:02 Server: 1001 has crashed, trying to connect to backup server on port: 0
-2023/11/28 17:13:00 Starting client
-2023/11/28 17:13:45 Starting client
-2023/11/28 17:15:40 Starting client
-2023/11/28 17:17:30 Starting client
-2023/11/28 17:20:08 Starting client
+2023/11/28 17:32:32 Starting client
+2023/11/28 17:32:43 Bid to low or the action has ended
+2023/11/28 17:32:46 Bid accepted with a bid of 20 
+2023/11/28 17:33:09 Server: 1001 has crashed, trying to connect to backup server on port: 1000
+2023/11/28 17:33:09 Bid accepted with a bid of 35 

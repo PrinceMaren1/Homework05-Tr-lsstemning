@@ -36,7 +36,7 @@ func main() {
 	defer f.Close()
 	log.SetOutput(f)
 	log.Println("Starting server")
-	state.TimeStamp = 30 // Time counts down. When it hits 0, the auction ends
+	state.TimeStamp = 60 // Time counts down. When it hits 0, the auction ends
 
 	replicaPorts := strings.Split(*replicas, ",")
 
@@ -130,13 +130,20 @@ func (s *Server) GetAlternateServer(ctx context.Context, msg *gRPC.Empty) (*gRPC
 	var port int64 = 0
 	log.Println("Fetching alternate port for client")
 
+	// Workaround for error that can occur when multiple servers and clients are started simultaneously
 	for len(serverReplicas) == 0 {
 
 	}
 
 	for key := range serverReplicas {
-		port = key
-		break
+		_, err := serverReplicas[key].GetAuctionState(context.Background(), &gRPC.ClientInfo{ClientId: ""})
+		if err == nil {
+			port = key
+			break
+		} else {
+			// Removing item during map iteration should be safe in go. See example in https://go.dev/doc/effective_go#for
+			delete(serverReplicas, key)
+		}
 	}
 
 	log.Printf("Sending value to client: %v\n", port)
