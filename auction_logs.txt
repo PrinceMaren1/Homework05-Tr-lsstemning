@@ -1,0 +1,110 @@
+Server 1000:
+2023/11/28 17:32:32 Starting server
+2023/11/28 17:32:32 Started listening for incoming messages
+2023/11/28 17:32:32 Connecting to replica server at: 1002
+2023/11/28 17:32:32 Connecting to replica server at: 1001
+2023/11/28 17:32:33 Sending auction state to client 
+2023/11/28 17:32:33 Sending auction state to client 
+2023/11/28 17:32:33 Fetching alternate port for client
+2023/11/28 17:32:33 Sending value to client: 1002
+2023/11/28 17:32:37 Recived bid of 5 from client BidGod
+2023/11/28 17:32:37 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:32:37 Sending BID SUCCESS response to client.
+2023/11/28 17:32:41 Updating highest bid to align with replica
+2023/11/28 17:32:46 Updating highest bid to align with replica
+2023/11/28 17:32:49 Updating highest bid to align with replica
+2023/11/28 17:32:50 Sending auction state to client BidGod
+2023/11/28 17:32:53 Recived bid of 30 from client BidGod
+2023/11/28 17:32:53 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:32:53 Sending BID SUCCESS response to client.
+2023/11/28 17:32:58 Fetching alternate port for client
+2023/11/28 17:32:58 Sending value to client: 1001
+2023/11/28 17:32:58 Sending auction state to client WantToBuySpaces
+2023/11/28 17:33:00 Recived bid of 32 from client WantToBuySpaces
+2023/11/28 17:33:00 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:33:00 Sending BID SUCCESS response to client.
+2023/11/28 17:33:06 Sending auction state to client WantToBuySpaces
+2023/11/28 17:33:09 Fetching alternate port for client
+2023/11/28 17:33:09 Sending value to client: 0
+2023/11/28 17:33:09 Recived bid of 35 from client SortePowerRanger
+2023/11/28 17:33:09 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:33:09 Sending BID SUCCESS response to client.
+2023/11/28 17:33:13 Sending auction state to client WantToBuySpaces
+2023/11/28 17:33:13 Recived bid of 40 from client WantToBuySpaces
+2023/11/28 17:33:13 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:33:13 Sending BID SUCCESS response to client.
+2023/11/28 17:33:18 Recived bid of 38 from client BidGod
+2023/11/28 17:33:18 Sending BID DENIED response to client.
+2023/11/28 17:33:32 Auction completed. Updating replicas.
+2023/11/28 17:33:37 Recived bid of 45 from client BidGod
+2023/11/28 17:33:37 Sending BID DENIED response to client.
+2023/11/28 17:33:39 Sending auction state to client BidGod
+
+Server 1001:
+2023/11/28 17:32:32 Starting server
+2023/11/28 17:32:32 Started listening for incoming messages
+2023/11/28 17:32:32 Connecting to replica server at: 1000
+2023/11/28 17:32:33 Fetching alternate port for client
+2023/11/28 17:32:33 Sending value to client: 1000
+2023/11/28 17:32:33 Connecting to replica server at: 1002
+2023/11/28 17:32:37 Updating highest bid to align with replica
+2023/11/28 17:32:41 Updating highest bid to align with replica
+2023/11/28 17:32:43 Recived bid of 8 from client SortePowerRanger
+2023/11/28 17:32:43 Sending BID DENIED response to client.
+2023/11/28 17:32:46 Recived bid of 20 from client SortePowerRanger
+2023/11/28 17:32:46 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:32:46 Sending BID SUCCESS response to client.
+2023/11/28 17:32:49 Updating highest bid to align with replica
+2023/11/28 17:32:53 Updating highest bid to align with replica
+2023/11/28 17:32:58 Sending auction state to client 
+2023/11/28 17:33:00 Updating highest bid to align with replica
+
+Server 1002:
+2023/11/28 17:32:32 Starting server
+2023/11/28 17:32:32 Started listening for incoming messages
+2023/11/28 17:32:32 Connecting to replica server at: 1000
+2023/11/28 17:32:33 Fetching alternate port for client
+2023/11/28 17:32:33 Sending value to client: 1000
+2023/11/28 17:32:33 Sending auction state to client 
+2023/11/28 17:32:33 Connecting to replica server at: 1001
+2023/11/28 17:32:37 Updating highest bid to align with replica
+2023/11/28 17:32:39 Sending auction state to client WantToBuySpaces
+2023/11/28 17:32:41 Recived bid of 10 from client WantToBuySpaces
+2023/11/28 17:32:41 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:32:41 Sending BID SUCCESS response to client.
+2023/11/28 17:32:46 Updating highest bid to align with replica
+2023/11/28 17:32:48 Recived bid of 18 from client WantToBuySpaces
+2023/11/28 17:32:48 Sending BID DENIED response to client.
+2023/11/28 17:32:49 Recived bid of 25 from client WantToBuySpaces
+2023/11/28 17:32:49 Bid seems good unless replicas has a higher bid. Updating state in replicas.
+2023/11/28 17:32:49 Sending BID SUCCESS response to client.
+2023/11/28 17:32:53 Updating highest bid to align with replica
+
+Client BidGod:
+2023/11/28 17:32:32 Starting client
+2023/11/28 17:32:37 Bid accepted with a bid of 5 
+2023/11/28 17:32:50 The current highest bidder is WantToBuySpaces, with a bid of 25
+2023/11/28 17:32:53 Bid accepted with a bid of 30 
+2023/11/28 17:33:18 Bid to low or the action has ended
+2023/11/28 17:33:37 Bid to low or the action has ended
+2023/11/28 17:33:39 The auction is completed. WantToBuySpaces won with a bid of 40
+
+Client SortePowerRanger
+2023/11/28 17:32:32 Starting client
+2023/11/28 17:32:43 Bid to low or the action has ended
+2023/11/28 17:32:46 Bid accepted with a bid of 20 
+2023/11/28 17:33:09 Server: 1001 has crashed, trying to connect to backup server on port: 1000
+2023/11/28 17:33:09 Bid accepted with a bid of 35 
+
+Client WantToBuySpaces
+2023/11/28 17:32:32 Starting client
+2023/11/28 17:32:39 The current highest bidder is BidGod, with a bid of 5
+2023/11/28 17:32:41 Bid accepted with a bid of 10 
+2023/11/28 17:32:48 Bid to low or the action has ended
+2023/11/28 17:32:49 Bid accepted with a bid of 25 
+2023/11/28 17:32:58 Server: 1002 has crashed, trying to connect to backup server on port: 1000
+2023/11/28 17:32:58 The current highest bidder is BidGod, with a bid of 30
+2023/11/28 17:33:00 Bid accepted with a bid of 32 
+2023/11/28 17:33:06 The current highest bidder is WantToBuySpaces, with a bid of 32
+2023/11/28 17:33:13 The current highest bidder is SortePowerRanger, with a bid of 35
+2023/11/28 17:33:13 Bid accepted with a bid of 40 
