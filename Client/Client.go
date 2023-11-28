@@ -98,6 +98,7 @@ func PrintAuctionState() {
 	state, err := server.GetAuctionState(context.Background(), &gRPC.Empty{})
 
 	if err != nil {
+		log.Printf("Server: %v has crashed, trying to connect to backup server on port: %v", *serverPort, alternatePort)
 		ConnectToServer(alternatePort)
 		PrintAuctionState()
 	} else {

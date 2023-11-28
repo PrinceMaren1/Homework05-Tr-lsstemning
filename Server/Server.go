@@ -151,7 +151,7 @@ func (s *Server) UpdateAuctionState(ctx context.Context, msg *gRPC.AuctionState)
 	if !state.IsCompleted {
 		state.IsCompleted = msg.IsCompleted
 	}
-	// Set Action time to the lowest of the	two states
+	// Set Auction time to the lowest of the two states
 	state.TimeStamp = min(msg.TimeStamp, state.TimeStamp)
 	// Update completed state
 	// Returning updated states
