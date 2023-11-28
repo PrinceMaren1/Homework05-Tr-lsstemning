@@ -120,9 +120,11 @@ func UpdateReplicas() {
 
 		if err != nil {
 			delete(serverReplicas, key)
+		} else {
+			state = freshestState
 		}
 
-		state = freshestState
+	
 	}
 }
 
